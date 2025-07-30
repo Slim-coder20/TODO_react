@@ -67,7 +67,7 @@ function App() {
             <li className="text-slate-50 text-md">Pas d'items à afficher...</li>
           )}
            {/* Pour afficher les items dynamiquement via la méthode map en récupérant les ids */}
-          {todoList.map(item => (
+          {todoList.length && todoList.map(item => (
           <ListItem key={item.id} itemData={item} deleteTodo={deleteTodo}/>
           ))}
          
