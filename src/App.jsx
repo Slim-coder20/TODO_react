@@ -11,14 +11,12 @@ function App() {
     { id: nanoid(8), content: "item3" },
   ]);
 
-
-
   // État pour l'input du formulaire
   const [todo, setTodo] = useState("");
-  
-  // État pour validation des Todos 
-  const [showValidation, setshowValidation] = useState(false)
-  
+
+  // État pour validation des Todos
+  const [showValidation, setshowValidation] = useState(false);
+
   // Supprime un todo par son ID
   function deleteTodo(id) {
     setTodoList(todoList.filter((todo) => todo.id !== id));
@@ -26,14 +24,16 @@ function App() {
 
   // Ajoute un nouveau todo
   function handleSubmit(e) {
-    if(todo === ""){
-      setshowValidation(true)
-      return
+    e.preventDefault(); // Empêche le rechargement TOUJOURS
+
+    if (todo === "") {
+      setshowValidation(true);
+      return;
     }
-    e.preventDefault();
+
     setTodoList([...todoList, { id: nanoid(), content: todo }]);
-    setTodo("")
-    setshowValidation(false); 
+    setTodo("");
+    setshowValidation(false);
   }
 
   return (
@@ -53,9 +53,9 @@ function App() {
             placeholder="Entrez votre tâche..."
           />
           {showValidation && (
-             <p className="text-red-400">
-              Ajoouter d'abord du contenu à votre tâche 
-             </p>
+            <p className="text-red-400">
+              Ajoouter d'abord du contenu à votre tâche
+            </p>
           )}
           <button className="mt-4 py-2 px-2 bg-slate-50 rounded min-w-[115px]">
             Ajouter
@@ -66,11 +66,11 @@ function App() {
           {todoList.length === 0 && (
             <li className="text-slate-50 text-md">Pas d'items à afficher...</li>
           )}
-           {/* Pour afficher les items dynamiquement via la méthode map en récupérant les ids */}
-          {todoList.length && todoList.map(item => (
-          <ListItem key={item.id} itemData={item} deleteTodo={deleteTodo}/>
-          ))}
-         
+          {/* Pour afficher les items dynamiquement via la méthode map en récupérant les ids */}
+          {todoList.length &&
+            todoList.map((item) => (
+              <ListItem key={item.id} itemData={item} deleteTodo={deleteTodo} />
+            ))}
         </ul>
       </div>
     </div>
