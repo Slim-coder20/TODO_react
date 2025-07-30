@@ -10,6 +10,8 @@ function App() {
     {id: nanoid(8),content: "item3"}
   ]);
 
+
+
   // cette fonction nous servira de supprimer les todoslist // 
 
   function deleteTodo(id){
@@ -35,12 +37,12 @@ function App() {
           </button>
         </form>
         <ul>
-          {/* On utilise cette condition pour afficher le message en cas ou y'aura plus d'items a afficher  */}
+          {/* On utilise cette condition avec l'operation short-circuit  pour afficher le message en cas ou y'aura plus d'items a afficher  */}
           {todoList.length === 0 && (
             <li className="text-slate-50 text-md">Pas d'items à afficher...</li>
           )}
            {/* Pour afficher les items dynamiquement via la méthode map en récupérant les ids */}
-          {todoList.map(item => (
+          { todoList.length > 0 && todoList.map(item => (
           <ListItem key={item.id} itemData={item} deleteTodo={deleteTodo}/>
           ))}
          
